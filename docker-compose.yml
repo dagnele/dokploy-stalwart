@@ -16,5 +16,14 @@ services:
       - stalwart_data:/opt/stalwart-mail
     restart: unless-stopped
 
+  traefik-certs-dumper:
+    image: ldez/traefik-certs-dumper:v2.8.1
+    volumes:
+      - /etc/dokploy/traefik/dynamic/acme.json:/traefik/acme.json:ro
+      - /etc/dokploy/traefik/dynamic/certificates:/output
+    command: file --watch --source /traefik/acme.json --dest /output
+    restart: unless-stopped
+
+
 volumes:
   stalwart_data:
