@@ -19,9 +19,9 @@ services:
   traefik-certs-dumper:
     image: ldez/traefik-certs-dumper:latest
     volumes:
-      - /etc/dokploy/traefik/dynamic/acme.json:/traefik/acme.json:ro
-      - /etc/dokploy/traefik/dynamic/certificates:/output
-    command: file --watch --source /traefik/acme.json --dest /output
+      - /etc/dokploy/traefik/dynamic/acme.json:/acme.json:ro
+      - /etc/dokploy/traefik/dynamic/certificates:/dump
+    command: file --watch --version v3 --domain-subdir 
     restart: unless-stopped
 
 
